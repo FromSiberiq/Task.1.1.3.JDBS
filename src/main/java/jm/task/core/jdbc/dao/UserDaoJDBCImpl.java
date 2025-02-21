@@ -37,7 +37,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public void dropUsersTable() {//удаление таблицы юзеров
+    public void dropUsersTable() {
         String dropTableSQL = "DROP TABLE IF EXISTS users";
         try (Statement statement = connection.createStatement()) {
             statement.execute(dropTableSQL);
@@ -48,7 +48,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public void saveUser(String user_name, String user_lastName, byte user_age) {//добавление юзера в таблицу
+    public void saveUser(String user_name, String user_lastName, byte user_age) {
         String insertSQL = "INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)";
         try
                 (PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
@@ -63,7 +63,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public void removeUserById(long id) {//удаление юзера по id
+    public void removeUserById(long id) {
         String deleteSQL = "DELETE FROM users WHERE id=?";
         try(PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL)){
             preparedStatement.setLong(1, id);
@@ -75,7 +75,7 @@ public class UserDaoJDBCImpl implements UserDao {
         }
     }
 
-    public List<User> getAllUsers() { // получение всех юзеров из таблицы
+    public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         String selectSQL = "SELECT * FROM users";
         try(ResultSet set = connection.prepareStatement(selectSQL).executeQuery()) {
@@ -94,7 +94,7 @@ public class UserDaoJDBCImpl implements UserDao {
         return users;
     }
 
-    public void cleanUsersTable() {//очистка содержания таблицы
+    public void cleanUsersTable() {
         String truncateTableSQL = "TRUNCATE TABLE users";
         try(Statement statement = connection.createStatement()){
             statement.execute(truncateTableSQL);
